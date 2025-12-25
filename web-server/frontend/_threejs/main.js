@@ -4,7 +4,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 
-
 // ---------- SCENE ----------
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x202020);
