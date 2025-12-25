@@ -79,14 +79,12 @@ loader.load(
     model.traverse((obj) => {
       if (obj.isMesh) {
         console.log(obj.name);
+        
         if (obj.name == "light1_1"){
           obj.material = obj.material.clone(); // 🔑 critical
           obj.material.color.set(0xff0000);
         }
-        if (obj.name == "light2_1"){
-          obj.material = obj.material.clone(); // 🔑 critical
-          obj.material.color.set(0xfff000);
-        }
+        
       }
     });
   },
