@@ -65,8 +65,8 @@ controls.dampingFactor = 0.08;
 
 controls.update();
 
-
-
+// lights names are light[n]_1
+// for example to turn on the first light for we light1_1 and set the color
 
 
 // ---------- LOAD GLB ----------
@@ -76,10 +76,17 @@ loader.load(
   (gltf) => {
     const model = gltf.scene;
     scene.add(model);
-
     model.traverse((obj) => {
       if (obj.isMesh) {
         console.log(obj.name);
+        if (obj.name == "light1_1"){
+          obj.material = obj.material.clone(); // 🔑 critical
+          obj.material.color.set(0xff0000);
+        }
+        if (obj.name == "light2_1"){
+          obj.material = obj.material.clone(); // 🔑 critical
+          obj.material.color.set(0xfff000);
+        }
       }
     });
   },
@@ -88,7 +95,6 @@ loader.load(
     console.error('GLB load error:', error);
   }
 );
-
 
 // ---------- HDR enviroment ----------
 const rgbeLoader = new RGBELoader();
