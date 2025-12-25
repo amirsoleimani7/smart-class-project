@@ -72,7 +72,7 @@ controls.update();
 // ---------- LOAD GLB ----------
 const loader = new GLTFLoader();
 loader.load(
-  "class-room.glb ",
+  "3d-assets/class-room.glb",
   (gltf) => {
     const model = gltf.scene;
     scene.add(model);
@@ -92,11 +92,13 @@ loader.load(
 
 // ---------- HDR enviroment ----------
 const rgbeLoader = new RGBELoader();
-rgbeLoader.load('/hdr/studio_small_08_1k.hdr', (envMap) => {
-  envMap.mapping = THREE.EquirectangularReflectionMapping;
-  scene.environment = envMap;
-});
 
+rgbeLoader.load('/hdr/studio_small_08_1k.hdr', (hdr) => {
+  hdr.mapping = THREE.EquirectangularReflectionMapping;
+
+  scene.environment = hdr;
+  scene.background = null; // keep background dark (optional)
+});
 // ---------- RESIZE ----------
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
