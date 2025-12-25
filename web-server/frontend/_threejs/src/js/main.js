@@ -88,15 +88,15 @@ loader.load(
 
         // rotation of the door added
         if (obj.name == "door_2"){
-          obj.material = obj.material.clone(); // 🔑 critical
-          obj.material.color.set(0xff0000);
+          // obj.material = obj.material.clone(); // 🔑 critical
+          // obj.material.color.set(0xff0000);
 
           obj.rotation.y = Math.PI / 2; // 90 degrees
         }
         
         if (obj.name == "door_1"){
-          obj.material = obj.material.clone(); // 🔑 critical
-          obj.material.color.set(0xff0000);
+          // obj.material = obj.material.clone(); // 🔑 critical
+          // obj.material.color.set(0xff0000);
 
           obj.rotation.y = Math.PI / 2; // 90 degrees
         }
@@ -104,6 +104,7 @@ loader.load(
       }
     });
   },
+
   undefined,
   (error) => {
     console.error('GLB load error:', error);
