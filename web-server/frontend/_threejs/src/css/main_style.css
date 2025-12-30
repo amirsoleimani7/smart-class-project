@@ -35,6 +35,7 @@
 
 body {
     font-family: var(--main-font-family);   
+    /* background-color: #0b1020; */
 }
 
 
@@ -75,12 +76,10 @@ main Secion styling
 */
 .main {
     display: flex;
+    flex: 1;
     height: 100%;
     gap: 1rem;
 }
-
-
-
 /* 
 ===========================
 commnadLog styling
@@ -92,10 +91,6 @@ commnadLog styling
     border: 1px solid var(--border-colors);
     box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
 }
-
-
-
-
 /* 
 ===========================
 threeJS section styling
@@ -113,4 +108,8 @@ threeJS section styling
     width: 100%;
     border-radius: var(--main-border-radius);
 }
+
+
+
+
 

@@ -6,7 +6,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 // ---------- SCENE ----------
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x202020);
+scene.background = new THREE.Color(0xffffff);
 let renderer_div = document.querySelector('.convasCotainer');
 
 
@@ -24,6 +24,7 @@ camera.lookAt(0, 1, 0);
 
 
 
+
 // ---------- RENDERER ----------
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(renderer_div.offsetWidth, renderer_div.offsetHeight);
@@ -34,9 +35,17 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // best quality/performance
 
 
+
+// ---------- BACKGROUND IMAGE ----------
+const backgroundLoader = new THREE.TextureLoader();
+backgroundLoader.load('../../../assets/background-3d/Z.jpg' , function(texture)
+            {
+             scene.background = texture;  
+            });
+
+
 // main div for containing this one 
 renderer_div.appendChild(renderer.domElement);
-
 // ---------- LIGHTS ----------
 scene.add(new THREE.AmbientLight(0xffffff, 0.4));
 
@@ -123,21 +132,23 @@ rgbeLoader.load('/hdr/studio_small_08_1k.hdr', (hdr) => {
   hdr.mapping = THREE.EquirectangularReflectionMapping;
 
   scene.environment = hdr;
-  scene.background = null; // keep background dark (optional)
+  scene.background =  new THREE.Color(0xffffff); // keep background dark (optional)
 });
 
 // ---------- RESIZE ----------
 window.addEventListener('resize', () => {
   camera.aspect = renderer_div.offsetWidth / renderer_div.offsetHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(renderer_div.offsetWidth, renderer_div.offsetHeight);
+  renderer.setSize(renderer_div.offsetWidth, offsetHeight);
 });
 
 // ---------- RENDER LOOP ----------
 function animate() {
   requestAnimationFrame(animate);
+
   controls.update();
   renderer.render(scene, camera);
+  
 }
 
 animate();
