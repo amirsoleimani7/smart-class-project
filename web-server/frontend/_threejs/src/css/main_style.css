@@ -1,7 +1,35 @@
+/* adding the self hosted font */
+@font-face {
+    font-family: 'Roboto';
+    src: url("../../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf");
+}
+
+:root {
+    
+    /* main color palate */
+    --main-color : white;
+    --button-active-color : #EAF2FF;
+    --button-hover-color : #b2bccc; /* not sure about this yet*/
+    --border-colors : #2B40C7;
+    --shaodow-colors : #2B40C7;/* not sure about this yet*/
+    
+
+    /* main font family */
+    --main-font-family : 'Roboto';
+}
+
 /* boilder plate stuff  */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+
+body {
+    font-family: var(--main-font-family);
+    
+}
+
+
 
