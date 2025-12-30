@@ -11,7 +11,7 @@ scene.background = new THREE.Color(0x202020);
 // ---------- CAMERA ----------
 const camera = new THREE.PerspectiveCamera(
   60,
-  window.innerWidth / window.innerHeight,
+  renderer_div.innerWidth / renderer_div.innerHeight,
   0.1,
   100
 );
@@ -23,7 +23,7 @@ camera.lookAt(0, 1, 0);
 
 // ---------- RENDERER ----------
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(renderer_div.innerWidth, renderer_div.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.6;
@@ -31,7 +31,9 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap; // best quality/performance
 
 
-document.body.appendChild(renderer.domElement);
+// main div for containing this one 
+let renderer_div = document.querySelector('.convasCotainer');
+// renderer_div.appendChild(renderer.domElement);
 
 // ---------- LIGHTS ----------
 scene.add(new THREE.AmbientLight(0xffffff, 0.4));
@@ -121,11 +123,13 @@ rgbeLoader.load('/hdr/studio_small_08_1k.hdr', (hdr) => {
   scene.environment = hdr;
   scene.background = null; // keep background dark (optional)
 });
+
+
 // ---------- RESIZE ----------
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+renderer_div.addEventListener('resize', () => {
+  camera.aspect = renderer_div.innerWidth / renderer_div.innerHeight;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(renderer_div.innerWidth, renderer_div.innerHeight);
 });
 
 // ---------- RENDER LOOP ----------

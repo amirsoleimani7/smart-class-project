@@ -13,9 +13,17 @@
     --border-colors : #2B40C7;
     --shaodow-colors : #2B40C7;/* not sure about this yet*/
     
-
     /* main font family */
     --main-font-family : 'Roboto';
+
+    /* shadow */
+    --main-blare-amount : 5px;
+    --main-x-shadow : 0px;
+    --main-y-shadow : 0px;
+
+    
+    /* other main stuff */
+    --main-border-radius : 2rem;   
 }
 
 /* boilder plate stuff  */
@@ -25,11 +33,87 @@
     box-sizing: border-box;
 }
 
-
 body {
-    font-family: var(--main-font-family);
-    
+    font-family: var(--main-font-family);   
 }
 
+
+/* 
+===========================
+overall wrapper styling
+===========================
+*/
+.wrapper {
+    display: flex;
+    flex-direction:column ; 
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100vw;
+    height: 100vh; 
+}
+
+
+
+/* 
+===========================
+statusMenu, dataMenu styling 
+===========================
+*/
+.statusMenu , .dataMenu {
+    background-color: var(--main-color);
+    height: 100px;
+    border: 1px solid var(--border-colors);
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
+}
+
+
+/* 
+===========================
+main Secion styling
+===========================
+*/
+.main {
+    display: flex;
+    height: 100%;
+    gap: 1rem;
+}
+
+.commandSection{
+    width: 40%;
+    border-radius: var(--main-border-radius);
+    border: 1px solid var(--border-colors);
+    box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
+}
+
+.convasCotainer{
+    width: 60%;
+    border-radius: var(--main-border-radius);
+    border: 1px solid var(--border-colors);
+    box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
+}
+
+.main .convasCotainer canvas {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+===========================
+dataMenu styling 
+===========================
+*/
 
 
