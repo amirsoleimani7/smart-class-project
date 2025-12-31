@@ -6,7 +6,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 // ---------- SCENE ----------
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xffffff);
+scene.background = new THREE.Color(0x777777);
 let renderer_div = document.querySelector('.convasCotainer');
 
 
@@ -37,11 +37,11 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap; // best quality/performance
 
 
 // ---------- BACKGROUND IMAGE ----------
-const backgroundLoader = new THREE.TextureLoader();
-backgroundLoader.load('../../../assets/background-3d/Z.jpg' , function(texture)
-            {
-             scene.background = texture;  
-            });
+// const backgroundLoader = new THREE.TextureLoader();
+// backgroundLoader.load('../../../assets/background-3d/Z.jpg' , function(texture)
+//             {
+//              scene.background = texture;  
+//             });
 
 
 // main div for containing this one 
