@@ -17,11 +17,14 @@
     --main-font-family : 'Roboto';
 
     /* shadow */
-    --main-shadow : 0px 0px 5px #2B40C7; 
+    --main-shadow : 0px 0px 5px var(--shaodow-colors); 
 
-    
+ 
+    /* border  */
+    --main-border : 1px solid var(--border-colors);
+
     /* other main stuff */
-    --main-border-radius : 2rem;   
+    --main-border-radius : 50px;   
 }
 
 /* boilder plate stuff  */
@@ -59,10 +62,11 @@ overall wrapper styling
 statusMenu, dataMenu styling 
 ===========================
 */
-.statusMenu , .dataMenu {
+.statusMenu, .dataMenu {
+    padding: 3%;
     background-color: var(--main-color);
     height: 100px;
-    border: 1px solid var(--border-colors);
+    border: var(--main-border);
     border-radius: var(--main-border-radius);
     box-shadow: var(--main-shadow);
 }
@@ -71,23 +75,30 @@ statusMenu, dataMenu styling
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .innerTime {
+}
+
+.timeContainer {
+    border: var(--main-border);
+    box-shadow: var(--main-shadow);    
+    border-radius: var(--main-border-radius);
+    padding: .8rem 2%;
+}
+
+.innerTime {
     width: 100%;
-  }
-  
-  .timeContent {
+}
+
+.timeContent {
     display: flex;
     align-items: center;      /* vertical center */
     justify-content: center;  /* horizontal center */
     gap: .5rem;
     height: 100%;
-  }
-  
-  .timeContainer img {
-    height: 80px;
-  }
+}
+
+.timeContainer img {
+    height: 45px;
+}
   
 /* 
 ===========================
@@ -108,7 +119,7 @@ commnadLog styling
 .commandSection{
     width: 40%;
     border-radius: var(--main-border-radius);
-    border: 1px solid var(--border-colors);
+    border: var(--main-border);
     box-shadow: var(--main-shadow);
 }
 /* 
@@ -119,7 +130,7 @@ threeJS section styling
 .convasCotainer{
     width: 60%;
     border-radius: var(--main-border-radius);
-    border: 1px solid var(--border-colors);
+    border: var(--main-border);
     box-shadow: var(--main-shadow);
 }
 
@@ -129,7 +140,15 @@ threeJS section styling
     border-radius: var(--main-border-radius);
 }
 
+/* 
+===========================
+MenuButtons styling
+===========================
+*/
 
+.ButtonsContainer {
+        
+}
 
 
 
