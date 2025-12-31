@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>GLB Check</title>
+  
   <link rel="stylesheet" href="src/css/main_style.css">
+  <link rel="stylesheet" href="src/css/charts_style.css">
   <link rel="stylesheet" href="src/css/responsive.css"> 
 
 </head>
 <body>
-
 
 <script type="importmap">
 {
@@ -61,16 +62,13 @@
         test
       </div>
     </div>
-    
-    
-
-    
   </header>
   
   <div class="main">
     <div class="commandSection">
 
       <div class="controlPanel">
+        
         <div class="currentCategory">
           <input type="radio" id="all" name="cat" value="all" checked> 
           <label for="all">All</label>
@@ -132,7 +130,37 @@
       </div> 
   </footer>
 
+  <div class="charts">
+    <div class="chartItem" id="temprature" style="grid-area: temprature;" >            
+    </div>     
+    <div class="chartItem" id="humidity" style="grid-area: humidity;">
+      
+    </div>     
+    <div class="chartItem" id="co2" style="grid-area: co2;">
+      
+    </div>     
+    <div class="chartItem" id="light" style="grid-area: light;"> 
+    
+    </div>     
+
+    <div class="chartItem" id="noise" style="grid-area: noise;">
+      
+    </div>     
+  
+    <div class="chartItem" id="latency" style="grid-area: latency;">
+      
+    </div>     
+
+    <div class="chartItem" id="packetLoss" style="grid-area: packetLoss;">
+      
+    </div>     
+    
+  </div>
+  
 </div>
+
+
+
 
 
 

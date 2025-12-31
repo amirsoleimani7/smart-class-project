@@ -6,3 +6,6 @@ import { on } from "../core/events.js";
 on("state:update", (state) => {
   addTempPoint(state.sensors.temp);
 });
+
+
+
