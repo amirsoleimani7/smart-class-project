@@ -17,9 +17,7 @@
     --main-font-family : 'Roboto';
 
     /* shadow */
-    --main-blare-amount : 5px;
-    --main-x-shadow : 0px;
-    --main-y-shadow : 0px;
+    --main-shadow : 0px 0px 5px #2B40C7; 
 
     
     /* other main stuff */
@@ -66,9 +64,31 @@ statusMenu, dataMenu styling
     height: 100px;
     border: 1px solid var(--border-colors);
     border-radius: var(--main-border-radius);
-    box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
+    box-shadow: var(--main-shadow);
 }
 
+.statusMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .innerTime {
+    width: 100%;
+  }
+  
+  .timeContent {
+    display: flex;
+    align-items: center;      /* vertical center */
+    justify-content: center;  /* horizontal center */
+    gap: .5rem;
+    height: 100%;
+  }
+  
+  .timeContainer img {
+    height: 80px;
+  }
+  
 /* 
 ===========================
 main Secion styling
@@ -89,7 +109,7 @@ commnadLog styling
     width: 40%;
     border-radius: var(--main-border-radius);
     border: 1px solid var(--border-colors);
-    box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
+    box-shadow: var(--main-shadow);
 }
 /* 
 ===========================
@@ -100,7 +120,7 @@ threeJS section styling
     width: 60%;
     border-radius: var(--main-border-radius);
     border: 1px solid var(--border-colors);
-    box-shadow: var(--main-x-shadow) var(--main-y-shadow) var(--main-blare-amount) var(--shaodow-colors);    
+    box-shadow: var(--main-shadow);
 }
 
 
