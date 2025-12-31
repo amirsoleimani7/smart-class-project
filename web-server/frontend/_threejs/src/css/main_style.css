@@ -193,3 +193,34 @@ DataMenu styling
 }
 
 
+/* 
+===========================
+CommandLog section styling
+===========================
+*/
+.commandSection {
+    padding: 2rem;    
+}
+
+.commandSection .controlPanel {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.currentCategory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0px;
+    border: var(--main-border);
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-shadow);
+    padding: 1.5rem;
+}
+
+
+.currentCategory input[type='radio'] {
+    background-color: red;
+    appearance: none;
+}

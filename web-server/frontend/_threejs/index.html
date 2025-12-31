@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>GLB Check</title>
   <link rel="stylesheet" href="src/css/main_style.css">
-  
+  <link rel="stylesheet" href="src/css/responsive.css"> 
 </head>
 <body>
 
@@ -23,7 +23,7 @@
   <header class="statusMenu">
     
     <div class="ButtonsContainer">
-  
+      
       <button id="cameraConnection" class="btn btn-info">
         <strong><span>Camera</span></strong>
         <img src="./assets/processor-info/camera.png" alt="camera button image">
@@ -65,6 +65,32 @@
   
   <div class="main">
     <div class="commandSection">
+
+      <div class="controlPanel">
+        <div class="currentCategory">
+          <input type="radio" id="all" name="cat" value="all" checked> 
+          <label for="all">All</label>
+        </div>
+        
+        <div class="currentCategory">
+          <input type="radio" id="info" name="cat" value="info"> 
+          <label for="info">Information</label>
+        </div>
+      
+        <div class="currentCategory">
+          <input type="radio" id="error" name="cat" value="error"> 
+          <label for="error">Error</label>
+        </div>
+        
+        <div class="currentCategory">
+          <input type="radio" id="connection" name="cat" value="connection"> 
+          <label for="connection">Connection</label>
+        </div>
+        
+      </div>
+      
+
+
     </div>
     
     <div class="convasCotainer">
