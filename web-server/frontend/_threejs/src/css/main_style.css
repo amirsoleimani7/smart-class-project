@@ -247,13 +247,13 @@ CommandLog section styling
 
 .alert {
     width: 0px;
-    border: var(--main-border);
     border-radius: var(--main-border-radius);
     background-color: red;    
     overflow: hidden;
     transition: all 1s ease;
 }
-
+/* showing aler of something */
 .alert.active {
+    border: var(--main-border);
     width: 200px ;
 }
