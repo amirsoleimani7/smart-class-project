@@ -10,6 +10,8 @@ for (let i = 0; i < current_category_selected.length ;++i){
             div.className = 'command';  
             div.innerText = generate_command('12:32:13' , 'information', 'OK' , '128');            
             document.querySelector('.commandLog').appendChild(div);
+            document.querySelector('.commandLog').scrollTop = document.querySelector('.commandLog').scrollHeight;
+
         }
     })
 }
