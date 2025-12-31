@@ -244,3 +244,16 @@ CommandLog section styling
 .command {
         
 }
+
+.alert {
+    width: 0px;
+    border: var(--main-border);
+    border-radius: var(--main-border-radius);
+    background-color: red;    
+    overflow: hidden;
+    transition: all 1s ease;
+}
+
+.alert.active {
+    width: 200px ;
+}

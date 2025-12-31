@@ -9,10 +9,18 @@ for (let i = 0; i < current_category_selected.length ;++i){
             let div = document.createElement("div");
             div.className = 'command';  
             div.innerText = generate_command('12:32:13' , 'information', 'OK' , '128');            
+            
             document.querySelector('.commandLog').appendChild(div);
+            // auto scroll to the last child 
             document.querySelector('.commandLog').scrollTop = document.querySelector('.commandLog').scrollHeight;
 
+            document.querySelector('.alert').classList.add('active');
         }
+
+        if (e.target.value == 'error'){
+            document.querySelector('.alert').classList.remove('active');
+        }
+
     })
 }
 
