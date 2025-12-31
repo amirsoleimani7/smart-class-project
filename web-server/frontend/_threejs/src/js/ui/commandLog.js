@@ -4,5 +4,16 @@ console.log(current_category_selected);
 for (let i = 0; i < current_category_selected.length ;++i){
     current_category_selected[i].addEventListener('click' , (e) => {
         console.log(`selecte value is : ${e.target.value}`);
+        if (e.target.value == 'all'){
+            console.log(`height is : ${document.querySelector('.commandLog').offsetHeight}`)
+            let div = document.createElement("div");
+            div.className = 'command';  
+            div.innerText = generate_command('12:32:13' , 'information', 'OK' , '128');            
+            document.querySelector('.commandLog').appendChild(div);
+        }
     })
+}
+
+function generate_command(date_time , type , status , delay ){
+    return `${date_time} : [${type}] : (${status}, ${delay}ms)`
 }

@@ -36,7 +36,6 @@
 
 body {
     font-family: var(--main-font-family);   
-    /* background-color: #0b1020; */
 }
 
 
@@ -109,8 +108,8 @@ main Secion styling
 */
 .main {
     display: flex;
-    flex: 1;
-    height: 100%;
+    height: 100vh ;
+    min-height: 0;
     gap: 1rem;
 }
 /* 
@@ -192,20 +191,24 @@ DataMenu styling
     font-weight: 800;    
 }
 
-
 /* 
 ===========================
 CommandLog section styling
 ===========================
 */
 .commandSection {
-    padding: 2rem;    
+    padding: 1rem;
+    display: flex;
+    flex-direction:column;
+    flex: 1;
+    min-height: 0;
 }
 
 .commandSection .controlPanel {
     display: flex;
     justify-content: space-around;
     gap: 1rem;
+    margin-bottom: .5rem;
 }
 
 .currentCategory {
@@ -219,8 +222,25 @@ CommandLog section styling
     padding: 1.5rem;
 }
 
-
 .currentCategory input[type='radio'] {
     background-color: red;
     appearance: none;
+}
+
+.command {
+    border : var(--main-border);
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-shadow);
+    padding: 1rem;
+    margin-bottom: .5rem;
+}
+
+.commandLog {
+    flex : 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.command {
+        
 }
