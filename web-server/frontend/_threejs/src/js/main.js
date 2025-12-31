@@ -3,6 +3,7 @@ import "./three/classroom.js";
 import "./ui/commandLog.js";
 import "./ui/statusBar.js";
 import "./charts/sensorCharts.js";
+
 // import { initSocket } from "./network/socket.js";
 
 

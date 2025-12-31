@@ -11,6 +11,8 @@
 }
 
 .chartItem {
+    width: 100%;
+    height: 100%;
     border: var(--main-border);
     border-radius: var(--main-border-radius);   
     box-shadow: var( --main-shadow);    
