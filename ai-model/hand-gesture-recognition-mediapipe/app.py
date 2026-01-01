@@ -98,6 +98,12 @@ def main():
     #  ########################################################################
     mode = 0
 
+    # ------------------ ADD: terminal print control ------------------
+    frame_count = 0
+    PRINT_EVERY_N_FRAMES = 7   # ~0.5 sec at ~14 FPS
+    last_printed_label = None
+    # ----------------------------------------------------------------
+
     while True:
         fps = cvFpsCalc.get()
 
@@ -111,6 +117,7 @@ def main():
         ret, image = cap.read()
         if not ret:
             break
+        frame_count += 1
         image = cv.flip(image, 1)  # Mirror display
         debug_image = copy.deepcopy(image)
 
@@ -141,6 +148,17 @@ def main():
 
                 # Hand sign classification
                 hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
+                
+                # ------------------ ADD: print hand sign to terminal ------------------
+                hand_sign_text = keypoint_classifier_labels[hand_sign_id]
+
+                if frame_count % PRINT_EVERY_N_FRAMES == 0:
+                    frame_count = 0
+                    if hand_sign_text != last_printed_label:
+                        print(hand_sign_text)
+                        last_printed_label = hand_sign_text
+                # ----------------------------------------------------------------------
+                
                 if hand_sign_id == 2:  # Point gesture
                     point_history.append(landmark_list[8])
                 else:
