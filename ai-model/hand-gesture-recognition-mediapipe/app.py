@@ -52,6 +52,11 @@ def main():
 
     use_brect = True
 
+    # Video file input ###############################################################
+    # video_path = "./test.mp4"  # <-- CHANGE THIS PATH
+    # cap = cv.VideoCapture(video_path)
+
+    
     # Camera preparation ###############################################################
     cap = cv.VideoCapture(cap_device)
     cap.set(cv.CAP_PROP_FRAME_WIDTH, cap_width)
@@ -108,14 +113,17 @@ def main():
         fps = cvFpsCalc.get()
 
         # Process Key (ESC: end) #################################################
-        key = cv.waitKey(10)
-        if key == 27:  # ESC
+        # Video file input ################
+        key = cv.waitKey(15)
+        if key == 10:  # ESC
             break
         number, mode = select_mode(key, mode)
 
         # Camera capture #####################################################
         ret, image = cap.read()
         if not ret:
+            # Video file input ################
+            # cap.set(cv.CAP_PROP_POS_FRAMES, 0)
             break
         frame_count += 1
         image = cv.flip(image, 1)  # Mirror display
