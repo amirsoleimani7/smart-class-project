@@ -105,7 +105,7 @@ def main():
 
     # ------------------ ADD: terminal print control ------------------
     frame_count = 0
-    PRINT_EVERY_N_FRAMES = 7   # ~0.5 sec at ~14 FPS
+    PRINT_EVERY_N_FRAMES = 2   # ~0.5 sec at ~14 FPS
     last_printed_label = None
     # ----------------------------------------------------------------
 
