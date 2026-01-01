@@ -1,6 +1,7 @@
 # backend/routes/sensors.py
-from fastapi import APIRouter, WebSocket
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from connections import dashboard_clients
+import connections
 
 router = APIRouter()
 
@@ -8,12 +9,30 @@ router = APIRouter()
 async def sensors_ws(ws: WebSocket):
     await ws.accept()
 
-    while True:
-        data = await ws.receive_json()
+    # 🔴 ESP8266 CONNECTED
+    connections.esp8266_connected = True
+    await broadcast_status(True)
 
-        # forward to all dashboards
-        for client in dashboard_clients:
-            await client.send_json({
-                "type": "sensor",
-                "data": data
-            })
+    try:
+        while True:
+            data = await ws.receive_json()
+
+            for client in dashboard_clients:
+                await client.send_json({
+                    "type": "sensor",
+                    "data": data
+                })
+
+    except WebSocketDisconnect:
+        # 🔴 ESP8266 DISCONNECTED
+        connections.esp8266_connected = False
+        await broadcast_status(False)
+
+
+async def broadcast_status(connected: bool):
+    for client in dashboard_clients:
+        await client.send_json({
+            "type": "status",
+            "device": "esp8266",
+            "connected": connected
+        })

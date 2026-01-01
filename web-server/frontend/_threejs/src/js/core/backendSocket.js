@@ -27,6 +27,11 @@ ws.onmessage = (event) => {
     if (data.noise !== undefined)
       emit("sensor:noise", data.noise);
   }
+
+  if (msg.type === "status" && msg.device === "esp8266") {
+    emit("esp8266:status", msg.connected);
+  }
+
 };
 
 ws.onerror = (err) => {

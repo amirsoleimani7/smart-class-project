@@ -1,4 +1,5 @@
 import { emit } from "../core/events.js";
+import { on } from "../core/events.js";   // 🔴 THIS LINE WAS MISSING
 
 let mainMenuButton = document.querySelector('#mainHomeButton');
 let chartsButton = document.querySelector('#chartsButton');
@@ -21,4 +22,19 @@ chartsButton.addEventListener('click', () => {
   /* 🔥 Tell charts they are now visible */
   emit("charts:shown");
   
+});
+
+
+const dataButton = document.getElementById("dataConnection");
+
+on("esp8266:status", (connected) => {
+  if (connected) {
+    dataButton.classList.add("connected");
+    dataButton.classList.remove("disconnected");
+    dataButton.querySelector("span").textContent = "ESP8266 Connected";
+  } else {
+    dataButton.classList.add("disconnected");
+    dataButton.classList.remove("connected");
+    dataButton.querySelector("span").textContent = "ESP8266 Disconnected";
+  }
 });

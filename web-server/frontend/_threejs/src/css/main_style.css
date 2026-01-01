@@ -263,3 +263,13 @@ CommandLog section styling
     width: 200px ;
 }
 
+
+
+.btn.connected {
+    background-color: #2ecc71; /* green */
+  }
+  
+  .btn.disconnected {
+    background-color: #e74c3c; /* red */
+  }
+  
