@@ -20,4 +20,5 @@ chartsButton.addEventListener('click', () => {
 
   /* 🔥 Tell charts they are now visible */
   emit("charts:shown");
+  
 });

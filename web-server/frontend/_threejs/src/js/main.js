@@ -1,11 +1,11 @@
+
+import "./core/backendSocket.js";
 import "./network/socket.js";
 import "./three/classroom.js";
 import "./ui/commandLog.js";
 
 import "./ui/statusBar.js";
 import "./charts/sensorCharts.js";
-
-import "./core/testsocket.js";
 
 // import { initSocket } from "./network/socket.js";
 
