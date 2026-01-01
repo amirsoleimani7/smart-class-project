@@ -1,0 +1,259 @@
+/* adding the self hosted font */
+@font-face {
+    font-family: 'Roboto';
+    src: url("../../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf");
+}
+
+:root {
+    
+    /* main color palate */
+    --main-color : white;
+    --button-active-color : #EAF2FF;
+    --button-hover-color : #b2bccc; /* not sure about this yet*/
+    --border-colors : #2B40C7;
+    --shaodow-colors : #2B40C7;/* not sure about this yet*/
+    
+    /* main font family */
+    --main-font-family : 'Roboto';
+
+    /* shadow */
+    --main-shadow : 0px 0px 5px var(--shaodow-colors); 
+
+ 
+    /* border  */
+    --main-border : 2px solid var(--border-colors);
+
+    /* other main stuff */
+    --main-border-radius : 50px;   
+}
+
+/* boilder plate stuff  */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--main-font-family);   
+}
+
+
+/* 
+===========================
+overall wrapper styling
+===========================
+*/
+.wrapper {
+    display: flex;
+    flex-direction:column ; 
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+    width: 100vw;
+    height: 100vh; 
+}
+
+/* 
+===========================
+statusMenu, dataMenu styling 
+===========================
+*/
+.statusMenu, .dataMenu {
+    padding: .8rem;
+    background-color: var(--main-color);
+    height: 100px;
+    border: var(--main-border);
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-shadow);
+}
+
+.statusMenu {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.timeContainer {
+    border: var(--main-border);
+    box-shadow: var(--main-shadow);    
+    border-radius: var(--main-border-radius);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0rem 1rem;
+}
+
+.innerTime {
+    width: 100%;
+}
+
+.timeContent {
+    display: flex;
+    align-items: center;      /* vertical center */
+    justify-content: center;  /* horizontal center */
+    gap: .5rem;
+    height: 100%;
+}
+
+.timeContainer img {
+    height: 45px;
+}
+  
+/* 
+===========================
+main Secion styling
+===========================
+*/
+.main {
+    display: flex;
+    height: 100vh ;
+    min-height: 0;
+    gap: 1rem;
+}
+/* 
+===========================
+commnadLog styling
+===========================
+*/
+.commandSection{
+    width: 40%;
+    border-radius: var(--main-border-radius);
+    border: var(--main-border);
+    box-shadow: var(--main-shadow);
+}
+/* 
+===========================
+threeJS section styling
+===========================
+*/
+.convasCotainer{
+    width: 60%;
+    border-radius: var(--main-border-radius);
+    border: var(--main-border);
+    box-shadow: var(--main-shadow);
+}
+
+
+.main .convasCotainer canvas {
+    width: 100%;
+    border-radius: var(--main-border-radius);
+}
+
+/* 
+===========================
+MenuButtons styling
+===========================
+*/
+.ButtonsContainer {
+    height: 100%;
+    display: flex;
+    gap: .5rem;
+}
+
+.btn {
+    border: var(--main-border);
+    background-color: transparent;
+    border-radius: var(--main-border-radius);    
+    box-shadow: var(--main-shadow);
+    height: 100%;
+    font-weight: 800;
+    padding: 0rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    width: 120px;
+}
+
+.btn-info {
+    justify-content: space-between;
+    width: 175px;
+}
+
+.btn img {
+    width: 30px;
+    aspect-ratio: 1;
+}
+
+/* 
+===========================
+DataMenu styling
+===========================
+*/
+.dataMenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;    
+}
+
+.dataEntry .name{
+    font-weight: 800;    
+}
+
+/* 
+===========================
+CommandLog section styling
+===========================
+*/
+.commandSection {
+    padding: 1rem;
+    display: flex;
+    flex-direction:column;
+    flex: 1;
+    min-height: 0;
+}
+
+.commandSection .controlPanel {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-bottom: .5rem;
+}
+
+.currentCategory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0px;
+    border: var(--main-border);
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-shadow);
+    padding: 1.5rem;
+}
+
+.currentCategory input[type='radio'] {
+    background-color: red;
+    appearance: none;
+}
+
+.command {
+    border : var(--main-border);
+    border-radius: var(--main-border-radius);
+    box-shadow: var(--main-shadow);
+    padding: 1rem;
+    margin-bottom: .5rem;
+}
+
+.commandLog {
+    flex : 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.command {
+        
+}
+
+.alert {
+    width: 0px;
+    border-radius: var(--main-border-radius);
+    background-color: red;    
+    overflow: hidden;
+    transition: all 1s ease;
+}
+/* showing aler of something */
+.alert.active {
+    border: var(--main-border);
+    width: 200px ;
+}

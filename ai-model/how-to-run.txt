@@ -1,0 +1,3 @@
+- first isntall python 3.10.0
+- make an enviroment using the python3.10 (windwos : py -3.10 -m venv venv310) (linux : python3.10 -m venv venv310)
+- install the requirments using requirment.txt (pip install -r requirment.txt)
