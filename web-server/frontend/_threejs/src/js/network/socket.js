@@ -1,30 +1,21 @@
-import { updateState } from "../core/state.js";
+import { emit } from "../core/events.js";
 
-let socket = null;
+const socket = new WebSocket("ws://192.168.12.21:8080");
 
-export function initSocket() {
-  socket = new WebSocket("ws://YOUR_SERVER_URL");
+socket.addEventListener("open", () => {
+  console.log("Socket connected");
+});
 
-  socket.onopen = () => {
-    updateState({
-      esp32: { connected: true }
-    });
-  };
+socket.addEventListener("message", (event) => {
+  const data = JSON.parse(event.data);
 
-  socket.onclose = () => {
-    updateState({
-      esp32: { connected: false }
-    });
-  };
+  if (data.temperature !== undefined) {
+    emit("sensor:temperature", data.temperature);
+  }
+});
 
-  socket.onerror = () => {
-    updateState({
-      esp32: { connected: false }
-    });
-  };
+socket.addEventListener("close", () => {
+  console.log("Socket disconnected");
+});
 
-  socket.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    updateState(data);
-  };
-}
+export { socket };

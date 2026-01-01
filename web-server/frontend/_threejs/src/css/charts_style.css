@@ -1,14 +1,19 @@
 @import url("main_style.css");
 
-.charts{
-    height: 100%;
+.charts {
+    height: 100vh;
     padding: 1rem;
     display: none;
+    
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr 1fr;   /* 🔴 IMPORTANT */
     grid-template-areas: 
-                    "temprature humidity co2 light"
-                    "noise noise latency packetLoss";
+        "temprature humidity co2 light"
+        "noise noise latency packetLoss";
+
     gap: 1rem;
 }
+
 
 .chartItem {
     width: 100%;
@@ -18,5 +23,7 @@
     box-shadow: var( --main-shadow);    
 }
 
-
-
+.chartItem canvas {
+    width: 100%;
+    height: 100%;
+}
