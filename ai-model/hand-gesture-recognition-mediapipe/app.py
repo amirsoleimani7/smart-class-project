@@ -52,6 +52,11 @@ def main():
 
     use_brect = True
 
+    # Video file input ###############################################################
+    # video_path = "./test.mp4"  # <-- CHANGE THIS PATH
+    # cap = cv.VideoCapture(video_path)
+
+    
     # Camera preparation ###############################################################
     cap = cv.VideoCapture(cap_device)
     cap.set(cv.CAP_PROP_FRAME_WIDTH, cap_width)
@@ -68,7 +73,7 @@ def main():
 
     keypoint_classifier = KeyPointClassifier()
 
-    point_history_classifier = PointHistoryClassifier()
+    # point_history_classifier = PointHistoryClassifier()
 
     # Read labels ###########################################################
     with open('model/keypoint_classifier/keypoint_classifier_label.csv',
@@ -77,13 +82,13 @@ def main():
         keypoint_classifier_labels = [
             row[0] for row in keypoint_classifier_labels
         ]
-    with open(
-            'model/point_history_classifier/point_history_classifier_label.csv',
-            encoding='utf-8-sig') as f:
-        point_history_classifier_labels = csv.reader(f)
-        point_history_classifier_labels = [
-            row[0] for row in point_history_classifier_labels
-        ]
+    # with open(
+    #         'model/point_history_classifier/point_history_classifier_label.csv',
+    #         encoding='utf-8-sig') as f:
+    #     point_history_classifier_labels = csv.reader(f)
+    #     point_history_classifier_labels = [
+    #         row[0] for row in point_history_classifier_labels
+    #     ]
 
     # FPS Measurement ########################################################
     cvFpsCalc = CvFpsCalc(buffer_len=10)
@@ -93,24 +98,34 @@ def main():
     point_history = deque(maxlen=history_length)
 
     # Finger gesture history ################################################
-    finger_gesture_history = deque(maxlen=history_length)
+    # finger_gesture_history = deque(maxlen=history_length)
 
     #  ########################################################################
     mode = 0
+
+    # ------------------ ADD: terminal print control ------------------
+    frame_count = 0
+    PRINT_EVERY_N_FRAMES = 2   # ~0.5 sec at ~14 FPS
+    last_printed_label = None
+    # ----------------------------------------------------------------
 
     while True:
         fps = cvFpsCalc.get()
 
         # Process Key (ESC: end) #################################################
-        key = cv.waitKey(10)
-        if key == 27:  # ESC
+        # Video file input ################
+        key = cv.waitKey(15)
+        if key == 10:  # ESC
             break
         number, mode = select_mode(key, mode)
 
         # Camera capture #####################################################
         ret, image = cap.read()
         if not ret:
+            # Video file input ################
+            # cap.set(cv.CAP_PROP_POS_FRAMES, 0)
             break
+        frame_count += 1
         image = cv.flip(image, 1)  # Mirror display
         debug_image = copy.deepcopy(image)
 
@@ -141,22 +156,33 @@ def main():
 
                 # Hand sign classification
                 hand_sign_id = keypoint_classifier(pre_processed_landmark_list)
+                
+                # ------------------ ADD: print hand sign to terminal ------------------
+                hand_sign_text = keypoint_classifier_labels[hand_sign_id]
+
+                if frame_count % PRINT_EVERY_N_FRAMES == 0:
+                    frame_count = 0
+                    if hand_sign_text != last_printed_label:
+                        print(hand_sign_text)
+                        last_printed_label = hand_sign_text
+                # ----------------------------------------------------------------------
+                
                 if hand_sign_id == 2:  # Point gesture
                     point_history.append(landmark_list[8])
                 else:
                     point_history.append([0, 0])
 
-                # Finger gesture classification
-                finger_gesture_id = 0
-                point_history_len = len(pre_processed_point_history_list)
-                if point_history_len == (history_length * 2):
-                    finger_gesture_id = point_history_classifier(
-                        pre_processed_point_history_list)
+                # # Finger gesture classification
+                # finger_gesture_id = 0
+                # point_history_len = len(pre_processed_point_history_list)
+                # if point_history_len == (history_length * 2):
+                #     finger_gesture_id = point_history_classifier(
+                #         pre_processed_point_history_list)
 
-                # Calculates the gesture IDs in the latest detection
-                finger_gesture_history.append(finger_gesture_id)
-                most_common_fg_id = Counter(
-                    finger_gesture_history).most_common()
+                # # Calculates the gesture IDs in the latest detection
+                # finger_gesture_history.append(finger_gesture_id)
+                # most_common_fg_id = Counter(
+                #     finger_gesture_history).most_common()
 
                 # Drawing part
                 debug_image = draw_bounding_rect(use_brect, debug_image, brect)
@@ -166,8 +192,16 @@ def main():
                     brect,
                     handedness,
                     keypoint_classifier_labels[hand_sign_id],
-                    point_history_classifier_labels[most_common_fg_id[0][0]],
+                    "",   # no finger gesture text
                 )
+
+                # debug_image = draw_info_text(
+                #     debug_image,
+                #     brect,
+                #     handedness,
+                #     keypoint_classifier_labels[hand_sign_id],
+                #     point_history_classifier_labels[most_common_fg_id[0][0]],
+                # )
         else:
             point_history.append([0, 0])
 
