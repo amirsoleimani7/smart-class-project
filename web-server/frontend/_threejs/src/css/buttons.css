@@ -1,0 +1,61 @@
+@import url('main_style.css');
+
+
+/* 
+===========================
+Base Buttons animations 
+===========================
+*/
+.btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--main-border-radius);
+    background: var(--btn-background); /*Using the new variable*/
+    color: #e5e7eb;
+    border: var(--main-border);
+    box-shadow: var(--main-shadow);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btn img {
+    width: 30px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: brightness(0.8);
+}
+
+
+/* Hover effect */
+.btn:hover {
+    transform: translateY(-1px) scale(1.02);  /* Slight lift */
+    background: var(--btn-hover-background);  /* Slightly lighter background on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Active effect (when button is pressed) */
+.btn:active {
+    transform: translateY(1px) scale(0.98);  /* Pressing effect: slight scale down */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  /* Deepened shadow when pressed */
+    background: var(--btn-active-background);  /* Even lighter background when active */
+}
+
+/* Icon and text interaction */
+.btn:hover span {
+    color: #ffffff;  /* Text color shift on hover */
+}
+
+/* Connected and disconnected button states */
+.btn.connected {
+    background-color: var(--btn-connected-color) !important;  /* Light green */
+    box-shadow: var(--btn-connected-shadow);  /* Green glow effect */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn.disconnected {
+    background-color: var(--btn-disconnected-color) !important;  /* Coral (lighter red) */
+    box-shadow: var(--btn-disconnected-shadow);  /* Coral glow effect */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}

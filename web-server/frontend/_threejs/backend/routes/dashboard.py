@@ -22,3 +22,4 @@ async def dashboard_ws(ws: WebSocket):
             await ws.receive_text()
     except WebSocketDisconnect:
         dashboard_clients.remove(ws)
+

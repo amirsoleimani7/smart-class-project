@@ -25,6 +25,7 @@ chartsButton.addEventListener('click', () => {
 });
 
 
+
 const dataButton = document.getElementById("dataConnection");
 
 on("esp8266:status", (connected) => {

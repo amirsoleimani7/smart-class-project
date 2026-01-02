@@ -1,6 +1,6 @@
 
 import "./core/backendSocket.js";
-import "./network/socket.js";
+// import "./network/socket.js";
 import "./three/classroom.js";
 import "./ui/commandLog.js";
 
