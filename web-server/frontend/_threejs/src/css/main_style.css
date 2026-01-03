@@ -16,13 +16,13 @@
   --main-font-family: "Roboto";
 
   /* shadow */
-  --main-shadow: 0px 0px 5px var(--shadow-colors);
+  --main-shadow: 0px 0px 10px var(--shadow-colors);
 
   /* border */
-  --main-border: 2px solid var(--border-colors);
+  --main-border: 0px solid var(--border-colors);
 
   /* other main stuff */
-  --main-border-radius: 50px;
+  --main-border-radius: 10px;
 
   /* button states */
   --btn-background: linear-gradient(
@@ -43,8 +43,8 @@
 
   --btn-connected-color: #32cd32; /* Light green */
   --btn-disconnected-color: #ff7f50; /* Coral (lighter red) */
-  --btn-connected-shadow: 0 4px 12px rgba(50, 205, 50, 0.5); /* Green glow */
-  --btn-disconnected-shadow: 0 4px 12px rgba(255, 127, 80, 0.5); /* Coral glow */
+  --btn-connected-shadow: 0 0px 12px rgba(50, 205, 50, 0.5); /* Green glow */
+  --btn-disconnected-shadow: 0 0px 12px rgba(255, 127, 80, 0.5); /* Coral glow */
 }
 
 /* boilder plate stuff  */
@@ -66,21 +66,18 @@ overall wrapper styling
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 1rem;
   gap: 1rem;
   width: 100vw;
   height: 100vh;
 }
 
-body .wrapper {
-  overflow-x: hidden;
-}
 
 /* 
 ===========================
 statusMenu, dataMenu styling 
 ===========================
 */
+
 .statusMenu,
 .dataMenu {
   padding: 0.8rem;
@@ -92,6 +89,8 @@ statusMenu, dataMenu styling
 }
 
 .statusMenu {
+  margin: 1rem;
+  margin-bottom: 0px ;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -125,17 +124,21 @@ main Secion styling
   min-height: 0;
   gap: 1rem;
 }
+
 /* The "screen" area between header and bottom of wrapper */
 .viewPort {
   position: relative;
   flex: 1;
   min-height: 0;
-  overflow: hidden;
   display: flex;
+  
+  overflow: clip;          /* modern browsers */
+  overflow: hidden;        /* fallback */
 }
 
 /* Each page covers the whole viewport and slides */
 .page {
+  margin: 1rem;
   position: absolute;
   inset: 0;
   display: flex;
@@ -200,6 +203,7 @@ commnadLog styling
   border: var(--main-border);
   box-shadow: var(--main-shadow);
 }
+
 /* 
 ===========================
 threeJS section styling
@@ -226,7 +230,7 @@ MenuButtons styling
 .ButtonsContainer {
   height: 100%;
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 /* 
@@ -298,6 +302,7 @@ CommandLog section styling
   flex-direction: column;
   flex: 1;
   min-height: 0;
+  overflow: visible;
 }
 
 .commandSection .controlPanel {
@@ -373,7 +378,6 @@ CommandLog section styling
 }
 
 .command {
-  border: var(--main-border);
   border-radius: var(--main-border-radius);
   box-shadow: var(--main-shadow);
   padding: 1rem;
@@ -381,6 +385,7 @@ CommandLog section styling
 }
 
 .commandLog {
+  padding: .5rem;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -389,7 +394,7 @@ CommandLog section styling
 /* alert */
 .timeContainer {
   border: var(--main-border);
-  box-shadow: var(--main-shadow);
+  /* box-shadow: var(--main-shadow); */
   border-radius: var(--main-border-radius);
   height: 100%;
 

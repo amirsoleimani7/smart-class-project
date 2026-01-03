@@ -70,12 +70,6 @@ Base Buttons animations
   transition: background 250ms ease;
 }
 
-/* when charts page is active */
-body.mode-charts .statusMenu {
-  background: #eef2ff; /* light blue tint */
-}
-
-
 /* when main page is active */
 body.mode-main .statusMenu {
   background: white;
