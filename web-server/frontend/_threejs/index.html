@@ -86,32 +86,21 @@
         <section class="page mainPage is-active">
           <div class="main">
             <div class="commandSection">
+              
               <div class="controlPanel">
-                <div class="currentCategory" id="all">
-                  <input type="radio" id="all" name="cat" value="all" checked />
-                  <label for="all">All</label>
-                </div>
-
-                <div class="currentCategory" id="info">
-                  <input type="radio" id="info" name="cat" value="info" />
-                  <label for="info">Information</label>
-                </div>
-
-                <div class="currentCategory" id="error">
-                  <input type="radio" id="error" name="cat" value="error" />
-                  <label for="error">Error</label>
-                </div>
-
-                <div class="currentCategory" id="connection">
-                  <input
-                    type="radio"
-                    id="connection"
-                    name="cat"
-                    value="connection"
-                  />
-                  <label for="connection">Connection</label>
-                </div>
+                <input type="radio" id="cat-all" name="cat" value="all" checked>
+                <label class="catBtn" for="cat-all">All</label>
+              
+                <input type="radio" id="cat-info" name="cat" value="info">
+                <label class="catBtn" for="cat-info">Information</label>
+              
+                <input type="radio" id="cat-error" name="cat" value="error">
+                <label class="catBtn" for="cat-error">Error</label>
+              
+                <input type="radio" id="cat-connection" name="cat" value="connection">
+                <label class="catBtn" for="cat-connection">Connection</label>
               </div>
+
 
               <div class="commandLog"></div>
             </div>
@@ -120,31 +109,38 @@
           </div>
 
           <footer class="dataMenu">
-            <div class="dataEntry">
+            <div class="dataEntry" data-sensor="temperature">
+              <span class="pulse" aria-hidden="true"></span>
               <span class="name">Temprature : </span>
-              <strong> <span id="tem-data"></span></strong>
+              <strong><span id="tem-data"></span></strong>
             </div>
-
-            <div class="dataEntry">
+          
+            <div class="dataEntry" data-sensor="humidity">
+              <span class="pulse" aria-hidden="true"></span>
               <span class="name">Humidity : </span>
-              <strong> <span id="hum-data"></span></strong>
+              <strong><span id="hum-data"></span></strong>
             </div>
-
-            <div class="dataEntry">
+          
+            <div class="dataEntry" data-sensor="pressure">
+              <span class="pulse" aria-hidden="true"></span>
               <span class="name">Pressure : </span>
-              <strong> <span id="pres-data"></span></strong>
+              <strong><span id="pres-data"></span></strong>
             </div>
-
-            <div class="dataEntry">
+          
+            <div class="dataEntry" data-sensor="noise">
+              <span class="pulse" aria-hidden="true"></span>
               <span class="name">Noise : </span>
-              <strong> <span id="noise-data"></span></strong>
+              <strong><span id="noise-data"></span></strong>
             </div>
-
-            <div class="dataEntry">
+          
+            <div class="dataEntry" data-sensor="co2">
+              <span class="pulse" aria-hidden="true"></span>
               <span class="name">Smoke : </span>
-              <strong> <span id="Smoke-data"></span></strong>
+              <strong><span id="Smoke-data"></span></strong>
             </div>
           </footer>
+
+
         </section>
 
         <section class="page chartsPage">
