@@ -30,6 +30,17 @@ on("action:received", (action) => {
     doorAnim.door1.targetY = rot;
     doorAnim.door2.targetY = rot;
   }
+
+    // Curtain
+  if (action.target === "curtain") {
+    if (!curtainAnim.obj) return;
+
+    if (action.command === "open") {
+      curtainAnim.targetX = curtainAnim.openX;
+    } else if (action.command === "close") {
+      curtainAnim.targetX = curtainAnim.closeX;
+    }
+  }
 });
 
 // ---------- SCENE ----------
@@ -52,6 +63,27 @@ function animateDoor(doorState) {
     doorState.obj.rotation.y,
     doorState.targetY,
     DOOR_SMOOTH
+  );
+}
+
+
+// ---- curtain animation state ----
+// We'll animate by sliding on X. Adjust openX/closeX after you test.
+const curtainAnim = {
+  obj: null,
+  targetX: 0,
+  closeX: 0,   // will be set after model load (initial x)
+  openX: 1.0,  // how far to slide when open (tune this)
+};
+
+const CURTAIN_SMOOTH = 0.10;
+
+function animateCurtain(state) {
+  if (!state.obj) return;
+  state.obj.position.x = THREE.MathUtils.lerp(
+    state.obj.position.x,
+    state.targetX,
+    CURTAIN_SMOOTH
   );
 }
 
@@ -138,7 +170,7 @@ controls.update();
 // for example to turn on the first light for we light1_1 and set the color
 
 
-// ---------- LOAD GLB ----------
+/// ---------- LOAD GLB ----------
 const loader = new GLTFLoader();
 loader.load(
   "3d-assets/class-room5.glb",
@@ -146,25 +178,43 @@ loader.load(
     classroomModel = gltf.scene;
     scene.add(classroomModel);
 
-    // capture door objects ONCE
+    // ---- Doors: capture ONCE + initial closed pose ----
     doorAnim.door1.obj = classroomModel.getObjectByName("door_1");
     doorAnim.door2.obj = classroomModel.getObjectByName("door_2");
 
-    // set initial pose (closed)
-    if (doorAnim.door1.obj) doorAnim.door1.obj.rotation.y = 0;
-    if (doorAnim.door2.obj) doorAnim.door2.obj.rotation.y = 0;
+    if (doorAnim.door1.obj) {
+      doorAnim.door1.obj.rotation.y = 0;
+      doorAnim.door1.targetY = 0;
+    }
+    if (doorAnim.door2.obj) {
+      doorAnim.door2.obj.rotation.y = 0;
+      doorAnim.door2.targetY = 0;
+    }
 
+    // ---- Curtain: capture ONCE + initial closed pose ----
+    curtainAnim.obj = classroomModel.getObjectByName("cur_1");
+
+    if (curtainAnim.obj) {
+      // save initial position as "closed"
+      curtainAnim.closeX = curtainAnim.obj.position.x;
+      curtainAnim.targetX = curtainAnim.closeX;
+
+      // choose an "open" position relative to closed (TUNE THIS)
+      curtainAnim.openX = curtainAnim.closeX + 1.2;
+    }
+    // ---- Shadows + debug names ----
     classroomModel.traverse((obj) => {
       if (obj.isMesh) {
         obj.castShadow = true;
         obj.receiveShadow = true;
-        console.log(obj.name);
       }
+      console.log(obj.name);
     });
   },
   undefined,
   (error) => console.error("GLB load error:", error)
 );
+
 // ---------- HDR enviroment ----------
 const rgbeLoader = new RGBELoader();
 
@@ -206,6 +256,7 @@ function animate() {
   requestAnimationFrame(animate);
   animateDoor(doorAnim.door1);
   animateDoor(doorAnim.door2);
+  animateCurtain(curtainAnim);
 
   controls.update();
   renderer.render(scene, camera);
