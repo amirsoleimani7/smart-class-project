@@ -1,9 +1,11 @@
 // charts/noiseChart.js
 import { on } from "../core/events.js";
+import { makeChartResponsive  } from "../core/events.js";
 
 export function initNoiseChart() {
   const el = document.getElementById("noise");
   const chart = echarts.init(el);
+  makeChartResponsive(chart, el, ["charts:shown"]);
 
   const times = [];
   const raw = [];

@@ -1,7 +1,11 @@
 import { on } from "../core/events.js";
+import { makeChartResponsive  } from "../core/events.js";
 
 export function initHumidityChart() {
-  const chart = echarts.init(document.getElementById("humidity"));
+  const el = document.getElementById("humidity");
+  const chart = echarts.init(el);
+  makeChartResponsive(chart, el, ["charts:shown"]);
+
   const t = [], v = [];
 
   chart.setOption({

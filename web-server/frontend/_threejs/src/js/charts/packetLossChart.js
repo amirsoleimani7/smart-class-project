@@ -1,5 +1,6 @@
 // charts/packetLossChart.js
 import { on } from "../core/events.js";
+import { makeChartResponsive  } from "../core/events.js";
 
 export function initPacketLossChart() {
   const el = document.getElementById("packetLoss");

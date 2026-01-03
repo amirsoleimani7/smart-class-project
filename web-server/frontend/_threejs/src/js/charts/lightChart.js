@@ -1,9 +1,12 @@
 // charts/lightChart.js
 import { on } from "../core/events.js";
+import { makeChartResponsive  } from "../core/events.js";
 
 export function initLightChart() {
   const el = document.getElementById("light");
   const chart = echarts.init(el);
+  makeChartResponsive(chart, el, ["charts:shown"]);
+
 
   const times = [];
   const values = [];

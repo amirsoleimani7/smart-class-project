@@ -1,5 +1,6 @@
 // charts/latencyChart.js
 import { on } from "../core/events.js";
+import { makeChartResponsive  } from "../core/events.js";
 
 export function initLatencyChart() {
   const el = document.getElementById("latency");

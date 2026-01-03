@@ -1,5 +1,4 @@
 // charts/sensorCharts.js
-
 import { initTemperatureChart } from "./temperatureChart.js";
 import { initHumidityChart } from "./humidityChart.js";
 import { initCO2Chart } from "./co2Chart.js";

@@ -1,7 +1,11 @@
 import { on } from "../core/events.js";
+import { makeChartResponsive  } from "../core/events.js";
 
 export function initCO2Chart() {
-  const chart = echarts.init(document.getElementById("co2"));
+  const el = document.getElementById("co2");
+  const chart = echarts.init(el);
+  makeChartResponsive(chart, el, ["charts:shown"]);
+
   const t=[], v=[];
 
   chart.setOption({

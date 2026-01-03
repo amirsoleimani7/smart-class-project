@@ -57,3 +57,25 @@ export function once(eventName, callback) {
 export function clearEvents() {
   Object.keys(listeners).forEach(key => delete listeners[key]);
 }
+
+
+export function makeChartResponsive(chart, el, events = []) {
+  const resize = () => chart.resize();
+
+  // observe container
+  const ro = new ResizeObserver(resize);
+  ro.observe(el);
+
+  // window resize
+  window.addEventListener("resize", resize);
+
+  // custom events (like charts:shown)
+  for (const evt of events) {
+    on(evt, () => requestAnimationFrame(() => requestAnimationFrame(resize)));
+  }
+
+  return () => {
+    ro.disconnect();
+    window.removeEventListener("resize", resize);
+  };
+}
