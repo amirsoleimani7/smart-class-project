@@ -2,6 +2,14 @@ let current_category_selected = document.querySelectorAll("input[name=cat]");
 
 console.log(`the length is : ${current_category_selected.length}`);
 
+const alertBox = document.querySelector(".alert");
+const alertText = alertBox.querySelector(".alertText");
+const alertClose = alertBox.querySelector(".alertClose");
+
+alertClose.addEventListener("click", () => {
+  alertBox.classList.remove("active");
+});
+
 
 for (let i = 0; i < current_category_selected.length ;++i){
 
@@ -23,11 +31,12 @@ for (let i = 0; i < current_category_selected.length ;++i){
 
             document.querySelector('.commandLog').scrollTop = document.querySelector('.commandLog').scrollHeight;
             
-            document.querySelector('.alert').classList.add('active');
+            alertText.textContent = "New log added  asdas asdasd sds"; // or whatever you want
+            alertBox.classList.add("active");
         }
 
         if (e.target.value == 'error'){
-            document.querySelector('.alert').classList.remove('active');
+            alertBox.classList.remove("active");
         }
     })
 }

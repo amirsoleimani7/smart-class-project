@@ -60,33 +60,27 @@
         </div>
 
         <div class="timeContainer">
-          <marquee
-            class="innerTime"
-            behavior="alternate"
-            loop="-1"
-            width="100%"
-          >
+          <div class="alert" id="alertBox">
+            <span class="alertText"></span>
+            <button class="alertClose" type="button" aria-label="Close alert">×</button>
+          </div>
+        
+          <marquee class="innerTime" behavior="alternate" loop="-1" width="100%">
             <div class="timeContent">
               <strong><span id="day"></span></strong>
-
-              <img
-                src="./assets/logo/logo-white-cropped1.png"
-                alt="the team logo"
-              />
-
+              <img src="./assets/logo/logo-white-cropped1.png" alt="the team logo" />
               <strong><span id="time"></span></strong>
             </div>
           </marquee>
-          <div class="alert">test</div>
         </div>
-
+        
       </header>
 
       <div class="viewPort">
         <section class="page mainPage is-active">
           <div class="main">
+            
             <div class="commandSection">
-              
               <div class="controlPanel">
                 <input type="radio" id="cat-all" name="cat" value="all" checked>
                 <label class="catBtn" for="cat-all">All</label>
