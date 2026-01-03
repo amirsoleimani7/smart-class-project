@@ -8,8 +8,8 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: 1fr 1fr;   /* 🔴 IMPORTANT */
     grid-template-areas: 
-        "temprature humidity co2 light"
-        "noise noise latency packetLoss";
+        "pressure temprature temprature humidity"
+        "noise noise co2 light";
 
     gap: 1rem;
 }
@@ -27,3 +27,4 @@
     width: 100%;
     height: 100%;
 }
+

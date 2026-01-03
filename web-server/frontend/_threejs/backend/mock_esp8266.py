@@ -11,7 +11,8 @@ async def run():
                 "humidity": round(random.uniform(40, 60), 2),
                 "co2": random.randint(400, 1200),
                 "light": random.randint(100, 900),
-                "noise": round(random.uniform(30, 80), 2)
+                "noise": round(random.uniform(30, 80), 2),
+                "pressure": round(random.uniform(990, 1030), 2)
             }
 
             await ws.send(json.dumps(data))

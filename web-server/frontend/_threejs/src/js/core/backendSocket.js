@@ -26,6 +26,10 @@ ws.onmessage = (event) => {
 
     if (data.noise !== undefined)
       emit("sensor:noise", data.noise);
+  
+    if (data.pressure !== undefined)
+      emit("sensor:pressure", data.pressure);
+
   }
 
   if (msg.type === "status" && msg.device === "esp8266") {

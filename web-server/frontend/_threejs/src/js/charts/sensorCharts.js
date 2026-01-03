@@ -6,8 +6,11 @@ import { initCO2Chart } from "./co2Chart.js";
 
 import { initLightChart } from "./lightChart.js";
 import { initNoiseChart } from "./noiseChart.js";
-import { initLatencyChart } from "./latencyChart.js";
-import { initPacketLossChart } from "./packetLossChart.js";
+import { initPressureChart } from "./pressureChart.js";
+
+// we don't need these charts for now
+// import { initLatencyChart } from "./latencyChart.js";
+// import { initPacketLossChart } from "./packetLossChart.js";
 
 initTemperatureChart();
 initHumidityChart();
@@ -15,6 +18,8 @@ initCO2Chart();
 
 initLightChart();
 initNoiseChart();
-initLatencyChart();
-initPacketLossChart();
+// initLatencyChart();
+// initPacketLossChart();
+initPressureChart();
+
 
