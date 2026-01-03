@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import csv
-import copy
+import copy 
 import argparse
 import itertools
 from collections import deque
