@@ -337,7 +337,8 @@ CommandLog section styling
   border: var(--main-border);
   box-shadow: var(--main-shadow);
 
-  background: var(--btn-background);
+  background-color: #A8A8A8;;
+
   color: #e5e7eb;
 
   cursor: pointer;
@@ -363,9 +364,10 @@ CommandLog section styling
 .controlPanel input[type="radio"]:checked + .catBtn {
   background: var(--btn-connected-color);
   color: #ffffff;
+  background: var(--btn-background);
 
   /* stronger highlight */
-  box-shadow: var(--btn-connected-shadow);
+  box-shadow: var(--main-shadow);
 }
 
 /* keyboard accessibility */

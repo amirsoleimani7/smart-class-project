@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import { on } from "../core/events.js";
 
+let classroomModel = null;
 
 on("action:received", (action) => {
   console.log("ACTION:", action);
@@ -21,15 +22,13 @@ on("action:received", (action) => {
 
   // Example: door
   if (action.target === "door") {
-    const door1 = scene.getObjectByName("door_1");
-    const door2 = scene.getObjectByName("door_2");
-
     const openRot = Math.PI / 2;
     const closeRot = 0;
-
+  
     const rot = action.command === "open" ? openRot : closeRot;
-    if (door1) door1.rotation.y = rot;
-    if (door2) door2.rotation.y = rot;
+  
+    doorAnim.door1.targetY = rot;
+    doorAnim.door2.targetY = rot;
   }
 });
 
@@ -38,6 +37,23 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x777777);
 let renderer_div = document.querySelector('.convasCotainer');
 
+// ---- simple door animation state ----
+const doorAnim = {
+  door1: { obj: null, targetY: 0 },
+  door2: { obj: null, targetY: 0 },
+};
+
+// smoothing factor: 0.08–0.2 (bigger = faster)
+const DOOR_SMOOTH = 0.12;
+
+function animateDoor(doorState) {
+  if (!doorState.obj) return;
+  doorState.obj.rotation.y = THREE.MathUtils.lerp(
+    doorState.obj.rotation.y,
+    doorState.targetY,
+    DOOR_SMOOTH
+  );
+}
 
 // ---------- CAMERA ----------
 
@@ -127,33 +143,28 @@ const loader = new GLTFLoader();
 loader.load(
   "3d-assets/class-room5.glb",
   (gltf) => {
-    const model = gltf.scene;
-    scene.add(model);
-    model.traverse((obj) => {
+    classroomModel = gltf.scene;
+    scene.add(classroomModel);
+
+    // capture door objects ONCE
+    doorAnim.door1.obj = classroomModel.getObjectByName("door_1");
+    doorAnim.door2.obj = classroomModel.getObjectByName("door_2");
+
+    // set initial pose (closed)
+    if (doorAnim.door1.obj) doorAnim.door1.obj.rotation.y = 0;
+    if (doorAnim.door2.obj) doorAnim.door2.obj.rotation.y = 0;
+
+    classroomModel.traverse((obj) => {
       if (obj.isMesh) {
         obj.castShadow = true;
         obj.receiveShadow = true;
-    
         console.log(obj.name);
-    
-        if (obj.name === "light1_1") {
-          obj.material = obj.material.clone();
-          obj.material.color.set(0xff0000);
-        }
-    
-        if (obj.name === "door_1" || obj.name === "door_2") {
-          obj.rotation.y = Math.PI / 2;
-        }
       }
-    });    
+    });
   },
-
   undefined,
-  (error) => {
-    console.error('GLB load error:', error);
-  }
+  (error) => console.error("GLB load error:", error)
 );
-
 // ---------- HDR enviroment ----------
 const rgbeLoader = new RGBELoader();
 
@@ -193,6 +204,8 @@ ro.observe(renderer_div);
 // ---------- RENDER LOOP ----------
 function animate() {
   requestAnimationFrame(animate);
+  animateDoor(doorAnim.door1);
+  animateDoor(doorAnim.door2);
 
   controls.update();
   renderer.render(scene, camera);
