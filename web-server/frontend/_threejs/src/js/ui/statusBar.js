@@ -1,29 +1,23 @@
 import { emit } from "../core/events.js";
-import { on } from "../core/events.js";   // 🔴 THIS LINE WAS MISSING
+import { on } from "../core/events.js";
 
-let mainMenuButton = document.querySelector('#mainHomeButton');
-let chartsButton = document.querySelector('#chartsButton');
+const mainMenuButton = document.querySelector('#mainHomeButton');
+const chartsButton = document.querySelector('#chartsButton');
 
-let mainSection = document.querySelector('.main');
-let bottomFooter = document.querySelector('.dataMenu');
-let charts = document.querySelector('.charts');
+const mainPage = document.querySelector('.mainPage');
+const chartsPage = document.querySelector('.chartsPage');
 
 mainMenuButton.addEventListener('click', () => {
-  mainSection.style.display = 'flex';
-  bottomFooter.style.display = 'flex';
-  charts.style.display = 'none';
+  chartsPage.classList.remove('is-active');
+  mainPage.classList.add('is-active');
 });
 
 chartsButton.addEventListener('click', () => {
-  mainSection.style.display = 'none';
-  bottomFooter.style.display = 'none';
-  charts.style.display = 'grid';
+  mainPage.classList.remove('is-active');
+  chartsPage.classList.add('is-active');
 
-  /* 🔥 Tell charts they are now visible */
   emit("charts:shown");
-  
 });
-
 
 const dataButton = document.getElementById("dataConnection");
 

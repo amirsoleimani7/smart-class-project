@@ -1,174 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>GLB Check</title>
-  
-  <link rel="stylesheet" href="src/css/main_style.css">
-  <link rel="stylesheet" href="src/css/charts_style.css">
-  <link rel="stylesheet" href="src/css/responsive.css"> 
-  <link rel="stylesheet" href="src/css/buttons.css"> 
+  <head>
+    <meta charset="UTF-8" />
+    <title>GLB Check</title>
 
-  <!-- loading echarts lib -->
-  <script src="./src/js/echarts.js"></script>
-  
-</head>
-<body>
+    <link rel="stylesheet" href="src/css/main_style.css" />
+    <link rel="stylesheet" href="src/css/charts_style.css" />
+    <link rel="stylesheet" href="src/css/responsive.css" />
+    <link rel="stylesheet" href="src/css/buttons.css" />
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158/examples/jsm/"
-  }
-}
-</script>
+    <!-- loading echarts lib -->
+    <script src="./src/js/echarts.js"></script>
+  </head>
+  <body>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158/examples/jsm/"
+        }
+      }
+    </script>
 
+    <div class="wrapper">
+      <header class="statusMenu">
+        <div class="ButtonsContainer">
+          <button id="cameraConnection" class="btn btn-info">
+            <strong><span>Camera</span></strong>
+            <img
+              src="./assets/processor-info/camera.png"
+              alt="camera button image"
+            />
+          </button>
 
-<div class="wrapper">
-  <header class="statusMenu">
-    
-    <div class="ButtonsContainer">
-      
-      <button id="cameraConnection" class="btn btn-info">
-        <strong><span>Camera</span></strong>
-        <img src="./assets/processor-info/camera.png" alt="camera button image">
-      </button>
+          <button id="dataConnection" class="btn btn-info">
+            <strong><span>192.168.12.21</span></strong>
+            <img
+              src="./assets/processor-info/processor.png"
+              alt="processor button image"
+            />
+          </button>
 
-      <button id="dataConnection" class="btn btn-info">
-        <strong><span>192.168.12.21</span></strong>
-        <img src="./assets/processor-info/processor.png" alt="processor button image">
-      </button>
-      
-      <button id="mainHomeButton" class="btn">
-        <strong><span>Main</span></strong>
-        <img src="./assets/buttons/home-button.png" alt="home button image">
-      </button>
-  
-      <button id="chartsButton" class="btn">
-        <strong><span>Charts</span></strong>
-        <img src="./assets/buttons/charts-button.png" alt="charts button image">
-      </button>
-    
-    </div>
+          <button id="mainHomeButton" class="btn">
+            <strong><span>Main</span></strong>
+            <img
+              src="./assets/buttons/home-button.png"
+              alt="home button image"
+            />
+          </button>
 
-    <div class="timeContainer">
-      <marquee class="innerTime" behavior="alternate" loop="-1" width="100%">
-        <div class="timeContent">
-          <strong><span id="day"></span></strong>
-    
-          <img src="./assets/logo/logo-white-cropped1.png" alt="the team logo">
-    
-          <strong><span id="time"></span></strong>
-        </div>
-      </marquee>
-      <div class="alert">
-        test
-      </div>  
-    </div>
-  </header>
-  
-  <div class="main">
-    <div class="commandSection">
-
-      <div class="controlPanel">
-                
-        <div class="currentCategory" id="all">
-          <input type="radio" id="all" name="cat" value="all" checked> 
-          <label for="all">All</label>
+          <button id="chartsButton" class="btn">
+            <strong><span>Charts</span></strong>
+            <img
+              src="./assets/buttons/charts-button.png"
+              alt="charts button image"
+            />
+          </button>
         </div>
 
-        <div class="currentCategory" id="info">
-          <input type="radio" id="info" name="cat" value="info"> 
-          <label for="info">Information</label>
+        <div class="timeContainer">
+          <marquee
+            class="innerTime"
+            behavior="alternate"
+            loop="-1"
+            width="100%"
+          >
+            <div class="timeContent">
+              <strong><span id="day"></span></strong>
+
+              <img
+                src="./assets/logo/logo-white-cropped1.png"
+                alt="the team logo"
+              />
+
+              <strong><span id="time"></span></strong>
+            </div>
+          </marquee>
+          <div class="alert">test</div>
         </div>
-      
-        <div class="currentCategory" id="error">
-          <input type="radio" id="error" name="cat" value="error"> 
-          <label for="error">Error</label>
-        </div>
-        
-        <div class="currentCategory" id="connection">
-          <input type="radio" id="connection" name="cat" value="connection"> 
-          <label for="connection">Connection</label>
-        </div>
-        
+      </header>
+
+      <div class="viewPort">
+        <section class="page mainPage is-active">
+          <div class="main">
+            <div class="commandSection">
+              <div class="controlPanel">
+                <div class="currentCategory" id="all">
+                  <input type="radio" id="all" name="cat" value="all" checked />
+                  <label for="all">All</label>
+                </div>
+
+                <div class="currentCategory" id="info">
+                  <input type="radio" id="info" name="cat" value="info" />
+                  <label for="info">Information</label>
+                </div>
+
+                <div class="currentCategory" id="error">
+                  <input type="radio" id="error" name="cat" value="error" />
+                  <label for="error">Error</label>
+                </div>
+
+                <div class="currentCategory" id="connection">
+                  <input
+                    type="radio"
+                    id="connection"
+                    name="cat"
+                    value="connection"
+                  />
+                  <label for="connection">Connection</label>
+                </div>
+              </div>
+
+              <div class="commandLog"></div>
+            </div>
+
+            <div class="convasCotainer"></div>
+          </div>
+
+          <footer class="dataMenu">
+            <div class="dataEntry">
+              <span class="name">Temprature : </span>
+              <strong> <span id="tem-data"></span></strong>
+            </div>
+
+            <div class="dataEntry">
+              <span class="name">Humidity : </span>
+              <strong> <span id="hum-data"></span></strong>
+            </div>
+
+            <div class="dataEntry">
+              <span class="name">Pressure : </span>
+              <strong> <span id="pres-data"></span></strong>
+            </div>
+
+            <div class="dataEntry">
+              <span class="name">Noise : </span>
+              <strong> <span id="noise-data"></span></strong>
+            </div>
+
+            <div class="dataEntry">
+              <span class="name">Smoke : </span>
+              <strong> <span id="Smoke-data"></span></strong>
+            </div>
+          </footer>
+        </section>
+
+        <section class="page chartsPage">
+          <div class="charts">
+            <div
+              class="chartItem"
+              id="temprature"
+              style="grid-area: temprature"
+            ></div>
+            <div
+              class="chartItem"
+              id="humidity"
+              style="grid-area: humidity"
+            ></div>
+
+            <div class="chartItem" id="co2" style="grid-area: co2"></div>
+            <div class="chartItem" id="light" style="grid-area: light"></div>
+            <div class="chartItem" id="noise" style="grid-area: noise"></div>
+            <div
+              class="chartItem"
+              id="pressure"
+              style="grid-area: pressure"
+            ></div>
+          </div>
+        </section>
       </div>
-      
-      <div class="commandLog">
-
-      </div>
-
     </div>
-    
-    <div class="convasCotainer">
-    </div>
-    
-  </div>
-  
-  <footer class="dataMenu">
 
-      <div class="dataEntry">
-        <span class="name">Temprature : </span>
-        <strong> <span id="tem-data"></span></strong>
-      </div>  
-
-      <div class="dataEntry">
-        <span class="name">Humidity : </span>
-        <strong> <span id="hum-data"></span></strong>
-      </div>  
-
-      <div class="dataEntry">
-        <span class="name">Pressure : </span>
-        <strong> <span id="pres-data"></span></strong>
-      </div>  
-
-      <div class="dataEntry">
-        <span class="name">Noise : </span>
-        <strong> <span id="noise-data"></span></strong>
-      </div>  
-
-      <div class="dataEntry">
-        <span class="name">Smoke : </span>
-        <strong> <span id="Smoke-data"></span></strong>
-      </div> 
-  </footer>
-
-  <div class="charts">
-    
-    <div class="chartItem" id="temprature" style="grid-area: temprature;" >            
-    
-    </div>     
-
-    <div class="chartItem" id="humidity" style="grid-area: humidity;">
-      
-    </div>     
-    
-    <div class="chartItem" id="co2" style="grid-area: co2;">
-      
-    </div>     
-    
-    <div class="chartItem" id="light" style="grid-area: light;"> 
-
-    </div>     
-
-    <div class="chartItem" id="noise" style="grid-area: noise;">
-      
-    </div>     
-
-    <div class="chartItem" id="pressure" style="grid-area: pressure;">
-    
-    </div>
-  </div>
-  
-</div>
-
-
-
-
-
-
-<script type="module" src="./src/js/main.js"></script>
-
-</body>
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
 </html>

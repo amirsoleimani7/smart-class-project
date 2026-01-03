@@ -1,16 +1,14 @@
 @import url("main_style.css");
 
 .charts {
-    height: 100vh;
+    height: 100%;          /* 🔥 NOT 100vh */
     padding: 1rem;
     display: none;
-    
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr 1fr;   /* 🔴 IMPORTANT */
+    grid-template-rows: 1fr 1fr;
     grid-template-areas: 
         "pressure temprature temprature humidity"
         "noise noise co2 light";
-
     gap: 1rem;
 }
 
