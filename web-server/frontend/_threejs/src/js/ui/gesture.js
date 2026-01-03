@@ -1,14 +1,5 @@
 import { on } from "../core/events.js";
 
-function showAlert(text) {
-  const alertBox = document.getElementById("alertBox");
-  const alertText = alertBox?.querySelector(".alertText");
-  if (!alertBox || !alertText) return;
-
-  alertText.textContent = text;
-  alertBox.classList.add("active");
-}
-
 /**
  * Make an action readable in the UI
  */
