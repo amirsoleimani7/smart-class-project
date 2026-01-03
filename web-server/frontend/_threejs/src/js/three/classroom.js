@@ -32,15 +32,15 @@ on("action:received", (action) => {
   }
 
     // Curtain
-  if (action.target === "curtain") {
-    if (!curtainAnim.obj) return;
-
-    if (action.command === "open") {
-      curtainAnim.targetX = curtainAnim.openX;
-    } else if (action.command === "close") {
-      curtainAnim.targetX = curtainAnim.closeX;
+    if (action.target === "curtain") {
+      if (!curtainAnim.objs.length) return;
+    
+      if (action.command === "open") {
+        curtainAnim.targetScaleX = curtainAnim.openScaleX;
+      } else if (action.command === "close") {
+        curtainAnim.targetScaleX = curtainAnim.closeScaleX;
+      }
     }
-  }
 });
 
 // ---------- SCENE ----------
@@ -68,26 +68,24 @@ function animateDoor(doorState) {
 
 
 // ---- curtain animation state ----
-// We'll animate by sliding on X. Adjust openX/closeX after you test.
+// Animate by scaling on X (squish open/close)
+// ---- curtain animation state (multiple objects) ----
 const curtainAnim = {
-  obj: null,
-  targetX: 0,
-  closeX: 0,   // will be set after model load (initial x)
-  openX: 1.0,  // how far to slide when open (tune this)
+  objs: [],            // multiple curtain meshes/groups
+  targetScaleX: 1,
+  closeScaleX: 1,
+  openScaleX: 0.12,    // tune 0.05..0.3
 };
 
 const CURTAIN_SMOOTH = 0.10;
 
 function animateCurtain(state) {
-  if (!state.obj) return;
-  state.obj.position.x = THREE.MathUtils.lerp(
-    state.obj.position.x,
-    state.targetX,
-    CURTAIN_SMOOTH
-  );
-}
+  if (!state.objs.length) return;
 
-// ---------- CAMERA ----------
+  for (const obj of state.objs) {
+    obj.scale.x = THREE.MathUtils.lerp(obj.scale.x, state.targetScaleX, CURTAIN_SMOOTH);
+  }
+}// ---------- CAMERA ----------
 
 const camera = new THREE.PerspectiveCamera(
   60,
@@ -192,17 +190,25 @@ loader.load(
     }
 
     // ---- Curtain: capture ONCE + initial closed pose ----
-    curtainAnim.obj = classroomModel.getObjectByName("cur_1");
+    // collect all curtain objects that match name "cur_1"
+    curtainAnim.objs = [];
+    classroomModel.traverse((obj) => {
+      if (obj.name === "cur_1" || obj.name === "cur_2") {
+        curtainAnim.objs.push(obj);
+      }
+    });
 
-    if (curtainAnim.obj) {
-      // save initial position as "closed"
-      curtainAnim.closeX = curtainAnim.obj.position.x;
-      curtainAnim.targetX = curtainAnim.closeX;
+    if (curtainAnim.objs.length) {
+      // use the first one as reference for closed scale
+      curtainAnim.closeScaleX = curtainAnim.objs[0].scale.x;
+      curtainAnim.targetScaleX = curtainAnim.closeScaleX;
+      curtainAnim.openScaleX = curtainAnim.closeScaleX * 0.12; // tune
 
-      // choose an "open" position relative to closed (TUNE THIS)
-      curtainAnim.openX = curtainAnim.closeX + 1.2;
+      console.log("Curtains found:", curtainAnim.objs.length);
+    } else {
+      console.warn('No curtain objects named "cur_1" found in GLB');
     }
-    // ---- Shadows + debug names ----
+        // ---- Shadows + debug names ----
     classroomModel.traverse((obj) => {
       if (obj.isMesh) {
         obj.castShadow = true;
