@@ -79,14 +79,44 @@ const curtainAnim = {
 
 const CURTAIN_SMOOTH = 0.10;
 
-function animateCurtain(state) {
+let t = 0;
+
+// tune these
+const CURTAIN_SPRING = 18;   // stiffness
+const CURTAIN_DAMP = 8;      // damping
+const CURTAIN_WAVE = 0.015;  // wave amount
+
+function animateCurtain(state, dt) {
   if (!state.objs.length) return;
 
-  for (const obj of state.objs) {
-    obj.scale.x = THREE.MathUtils.lerp(obj.scale.x, state.targetScaleX, CURTAIN_SMOOTH);
-  }
-}// ---------- CAMERA ----------
+  // spring toward targetScaleX
+  state.vel ??= 0;
+  const x = state.current ?? state.closeScaleX;
 
+  const force = (state.targetScaleX - x) * CURTAIN_SPRING;
+  state.vel += force * dt;
+  state.vel *= Math.exp(-CURTAIN_DAMP * dt);
+
+  state.current = x + state.vel * dt;
+
+  // apply to all curtains
+  t += dt;
+  for (const obj of state.objs) {
+    // base scale
+    obj.scale.x = state.current;
+
+    // tiny “cloth wave” while moving
+    const moving = Math.abs(state.targetScaleX - state.current) > 0.002;
+    if (moving) {
+      obj.rotation.z = Math.sin(t * 6.0) * CURTAIN_WAVE;
+    } else {
+      // return rotation to rest smoothly
+      obj.rotation.z = THREE.MathUtils.lerp(obj.rotation.z, 0, 0.08);
+    }
+  }
+}
+
+// ---------- CAMERA ----------
 const camera = new THREE.PerspectiveCamera(
   60,
   renderer_div.offsetWidth / renderer_div.offsetHeight,
@@ -257,16 +287,20 @@ const ro = new ResizeObserver(() => {
 
 ro.observe(renderer_div); 
 
+
 // ---------- RENDER LOOP ----------
+const clock = new THREE.Clock();
+
 function animate() {
   requestAnimationFrame(animate);
+
+  const dt = Math.min(clock.getDelta(), 0.033); // cap delta
+
   animateDoor(doorAnim.door1);
   animateDoor(doorAnim.door2);
-  animateCurtain(curtainAnim);
+  animateCurtain(curtainAnim, dt);
 
   controls.update();
   renderer.render(scene, camera);
-  
 }
-
 animate();
