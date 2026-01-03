@@ -37,6 +37,75 @@
   .timeContent img {
     height: 36px;
   }
+  .main {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    height: 100%;
+    min-height: 0; /* important for inner scroll areas */
+  }
+
+  /* Remove the desktop widths */
+  .commandSection,
+  .convasCotainer {
+    width: 100%;
+  }
+
+  /* Command log stays scrollable and doesn't break layout */
+  .commandSection {
+    flex: 1 1 auto;
+    min-height: 220px; /* so it doesn't collapse too much */
+  }
+
+  /* Give canvas area a stable height on small screens */
+  .convasCotainer {
+    flex: 1 1 auto;
+    min-height: 280px; /* adjust to your preference */
+  }
+
+  /* Make the controls row wrap instead of squeezing */
+  .commandSection .controlPanel {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Each category button becomes responsive */
+  .currentCategory {
+    flex: 1 1 140px; /* wraps into multiple rows */
+    padding: 0.5rem 0.75rem;
+  }
+
+  .charts {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "temprature temprature"
+      "humidity pressure"
+      "noise noise"
+      "co2 light";
+  }
+
+  .chartItem {
+    min-height: 200px;
+  }
+
 }
 
+/* 
+@media (max-width: 650px) {
+    .charts {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "temprature"
+        "humidity"
+        "pressure"
+        "noise"
+        "co2"
+        "light";
+    }
+  
+    .chartItem {
+      min-height: 180px;
+    }
+  }
+   */
 

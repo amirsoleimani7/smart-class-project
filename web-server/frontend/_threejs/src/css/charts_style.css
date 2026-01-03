@@ -19,6 +19,14 @@
     border: var(--main-border);
     border-radius: var(--main-border-radius);   
     box-shadow: var( --main-shadow);    
+
+    transition: all 400ms ease;
+}
+
+.chartItem:hover {
+    scale: 1.01;
+    cursor: pointer;
+    box-shadow: var(--btn-connected-shadow);
 }
 
 .chartItem canvas {
@@ -26,3 +34,7 @@
     height: 100%;
 }
 
+.chartItem canvas:hover {
+    cursor: pointer;
+
+}
