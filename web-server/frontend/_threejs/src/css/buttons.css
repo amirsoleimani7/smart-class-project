@@ -49,13 +49,13 @@ Base Buttons animations
 
 /* Connected and disconnected button states */
 .btn.connected {
-    background-color: var(--btn-connected-color) !important;  /* Light green */
-    box-shadow: var(--btn-connected-shadow);  /* Green glow effect */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn.disconnected {
-    background-color: var(--btn-disconnected-color) !important;  /* Coral (lighter red) */
-    box-shadow: var(--btn-disconnected-shadow);  /* Coral glow effect */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
+    background: var(--btn-connected-color) !important;  /* ✅ override gradient */
+    box-shadow: var(--btn-connected-shadow);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .btn.disconnected {
+    background: var(--btn-disconnected-color) !important; /* ✅ override gradient */
+    box-shadow: var(--btn-disconnected-shadow);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
