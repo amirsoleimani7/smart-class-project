@@ -27,8 +27,8 @@ camera.lookAt(0, 1, 0);
 
 // ---------- RENDERER ----------
 const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(renderer_div.offsetWidth, renderer_div.offsetHeight);
-renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(renderer_div.clientWidth, renderer_div.clientHeight, false);renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.6;
 renderer.shadowMap.enabled = true;
@@ -137,10 +137,29 @@ rgbeLoader.load('/hdr/studio_small_08_1k.hdr', (hdr) => {
 
 // ---------- RESIZE ----------
 window.addEventListener('resize', () => {
-  camera.aspect = renderer_div.offsetWidth / renderer_div.offsetHeight;
+  const w = renderer_div.clientWidth;
+  const h = renderer_div.clientHeight;
+
+  camera.aspect = w / h;
   camera.updateProjectionMatrix();
-  renderer.setSize(renderer_div.offsetWidth, offsetHeight);
+
+  renderer.setSize(w, h, false); // false = don't touch canvas CSS size
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
+
+const ro = new ResizeObserver(() => {
+  const w = renderer_div.clientWidth;
+  const h = renderer_div.clientHeight;
+  if (!w || !h) return;
+
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(w, h, false);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+ro.observe(renderer_div); 
 
 // ---------- RENDER LOOP ----------
 function animate() {

@@ -218,6 +218,7 @@ threeJS section styling
 */
 .convasCotainer {
   width: 60%;
+  overflow: hidden;
   border-radius: var(--main-border-radius);
   border: var(--main-border);
   box-shadow: var(--main-shadow);
