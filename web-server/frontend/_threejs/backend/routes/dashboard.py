@@ -17,6 +17,14 @@ async def dashboard_ws(ws: WebSocket):
         "connected": connections.esp8266_connected
     })
 
+    # also send gesture status on connect
+    await ws.send_json({
+        "type": "status",
+        "device": "gesture",
+        "connected": connections.gesture_connected
+    })
+
+
     try:
         while True:
             await ws.receive_text()

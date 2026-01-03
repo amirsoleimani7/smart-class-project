@@ -36,11 +36,18 @@ ws.onmessage = (event) => {
     emit("esp8266:status", msg.connected);
   }
 
+  if (msg.type === "status" && msg.device === "gesture") {
+    emit("gesture:status", msg.connected);
+  }
+  
   if (msg.type === "gesture") {
     const g = msg.data;
     if (g.gesture !== undefined) emit("gesture:current", g.gesture);
   }
   
+  if (msg.type === "action") {
+    emit("action:received", msg.data);
+  }
 };
 
 ws.onerror = (err) => {

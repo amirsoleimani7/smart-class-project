@@ -2,7 +2,36 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { on } from "../core/events.js";
 
+
+on("action:received", (action) => {
+  console.log("ACTION:", action);
+
+  // Example: lights
+  if (action.target === "light") {
+    const name = `light${action.id}_1`;
+    const obj = scene.getObjectByName(name);
+    if (!obj) return;
+
+    obj.material = obj.material.clone();
+    if (action.command === "on") obj.material.color.set(0xffffaa);
+    if (action.command === "off") obj.material.color.set(0x222222);
+  }
+
+  // Example: door
+  if (action.target === "door") {
+    const door1 = scene.getObjectByName("door_1");
+    const door2 = scene.getObjectByName("door_2");
+
+    const openRot = Math.PI / 2;
+    const closeRot = 0;
+
+    const rot = action.command === "open" ? openRot : closeRot;
+    if (door1) door1.rotation.y = rot;
+    if (door2) door2.rotation.y = rot;
+  }
+});
 
 // ---------- SCENE ----------
 const scene = new THREE.Scene();
