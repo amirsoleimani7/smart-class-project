@@ -156,7 +156,7 @@ main Secion styling
     pointer-events: none;
   
     transition:
-      transform 450ms cubic-bezier(.22,.61,.36,1),
+      transform 400ms cubic-bezier(.22,.61,.36,1),
       opacity 250ms ease;
     will-change: transform, opacity;
   }
@@ -239,6 +239,7 @@ MenuButtons styling
   display: flex;
   gap: 0.5rem;
 }
+
 /* 
 ===========================
 DataMenu styling

@@ -1,3 +1,42 @@
-@media (max-width:1050px){
-    
+@media (max-width: 1050px) {
+  /* Make header stack nicely */
+  .statusMenu {
+    flex-direction: column-reverse; /* time on top, buttons under (because row-reverse on desktop) */
+    align-items: stretch;
+    gap: 0.75rem;
+
+    max-height: none; /* IMPORTANT: override the 100px cap */
+  }
+
+  /* Buttons row becomes multi-line */
+  .ButtonsContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center; /* or space-between */
+  }
+
+  /* Buttons become responsive */
+  .btn {
+    flex: 1 1 220px; /* grow, shrink, base width */
+    width: auto; /* remove any fixed width */
+    justify-content: center;
+  }
+
+  /* Time container becomes full width */
+  .timeContainer {
+    width: 100%;
+    height: auto; /* don't force 100% height */
+    margin-bottom: 0; /* no need once using gap */
+    padding: 0.5rem 1rem;
+  }
+
+  /* Optional: keep the marquee content from overflowing */
+  .timeContent img {
+    height: 36px;
+  }
 }
+
+
