@@ -6,7 +6,8 @@ import "./ui/commandLog.js";
 
 import "./ui/statusBar.js";
 import "./charts/sensorCharts.js";
-import "./ui/sensorPanel.js"
+import "./ui/sensorPanel.js";
+import "./ui/gesture.js";
 
 // import { initSocket } from "./network/socket.js";
 
